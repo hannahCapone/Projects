@@ -1,53 +1,43 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "Evaluator.h"
-#include "Transformer.h"
+#include "SLList.h"
+#include <cstdlib>
 #include <doctest.h>
-#include <iostream>
-#include <sstream>
-#include <string>
 
-using namespace std;
+#define SIZE 10
 
-TEST_CASE("InfixToPostfix") {
-  string code = "a = 456 + (1123 - 1); b = a + 1; b;";
-  stack<ds::Token> postfixStk = ds::InfixToPostfixTransformer::transform(code);
+TEST_CASE("SLList") {
+  ds::SLList<int> L;
 
-  stringstream ss1;
-  stack<ds::Token> postfixStkCopy = postfixStk;
-  while (!postfixStkCopy.empty()) {
-    ds::Token top = postfixStkCopy.top();
-    postfixStkCopy.pop();
-    ss1 << top << " ";
+  // randomly add SIZE ints to the array
+  int nums[SIZE];
+  srand(time(0)); // setting the seed for rand()
+  for (int i = SIZE - 1; i >= 0; i--) {
+    nums[i] = rand() % 20 + 1; // generating random numbers by rand()
+    L.addFirst(nums[i]);
   }
-  REQUIRE(ss1.str() ==
-          "Semicolon(;) Variable(b) Semicolon(;) Equal(=) Plus(+) Number(1) "
-          "Variable(a) Variable(b) Semicolon(;) Equal(=) Plus(+) Minus(-) "
-          "Number(1) Number(1123) Number(456) Variable(a) ");
 
-  ds::ExprTreeNode *root = ds::Evaluator::buildExprTree(postfixStk);
-  stringstream ss2;
-  ss2 << *root;
-  REQUIRE(ss2.str() == "└─Semicolon(;)\n"
-                       "  ├─Semicolon(;)\n"
-                       "  │ ├─Semicolon(;)\n"
-                       "  │ │ └─Equal(=)\n"
-                       "  │ │   ├─Variable(a)\n"
-                       "  │ │   └─Plus(+)\n"
-                       "  │ │     ├─Number(456)\n"
-                       "  │ │     └─Minus(-)\n"
-                       "  │ │       ├─Number(1123)\n"
-                       "  │ │       └─Number(1)\n"
-                       "  │ └─Equal(=)\n"
-                       "  │   ├─Variable(b)\n"
-                       "  │   └─Plus(+)\n"
-                       "  │     ├─Variable(a)\n"
-                       "  │     └─Number(1)\n"
-                       "  └─Variable(b)\n");
+  SUBCASE("get") {
+    CHECK(L.get(0) == nums[0]);
+    CHECK(L.get(SIZE - 1) == nums[SIZE - 1]);
+  }
 
-  ds::BigInt res = ds::Evaluator::evaluateExprTree(root);
-  stringstream ss3;
-  ss3 << res;
-  REQUIRE(ss3.str() == "1579");
+  SUBCASE("copy constructor") {
+    ds::SLList<int> *K = new ds::SLList<int>(L);
+    CHECK(L.size() == K->size());
+    CHECK(K->get(0) == nums[0]);
+    CHECK(K->get(SIZE - 1) == nums[SIZE - 1]);
+    delete K; // this should not also delete L
+  }
 
-  delete root;
+  SUBCASE("removeFirst") {
+    CHECK(nums[0] == L.removeFirst());
+    CHECK((SIZE - 1) == L.size());
+    CHECK(nums[5] == L.get(4));
+  }
+
+  SUBCASE("removeLast") {
+    CHECK(nums[SIZE - 1] == L.removeLast());
+    CHECK((SIZE - 1) == L.size());
+    CHECK(nums[5] == L.get(5));
+  }
 }
