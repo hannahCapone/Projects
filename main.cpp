@@ -1,33 +1,53 @@
-#include "IntArray.h"
-#include <cstdlib>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "Evaluator.h"
+#include "Transformer.h"
+#include <doctest.h>
 #include <iostream>
+#include <sstream>
+#include <string>
 
-int main() {
-  // create an array of 10 ints (invoke the constructor)
-  ds::IntArray nums(10);
+using namespace std;
 
-  // randomly add 10 ints to the array
-  srand(time(0)); // setting the seed for rand()
-  for (int i = 0; i < 10; i++) {
-    nums[i] = rand() % 10 + 1; // generating random numbers by rand()
+TEST_CASE("InfixToPostfix") {
+  string code = "a = 456 + (1123 - 1); b = a + 1; b;";
+  stack<ds::Token> postfixStk = ds::InfixToPostfixTransformer::transform(code);
+
+  stringstream ss1;
+  stack<ds::Token> postfixStkCopy = postfixStk;
+  while (!postfixStkCopy.empty()) {
+    ds::Token top = postfixStkCopy.top();
+    postfixStkCopy.pop();
+    ss1 << top << " ";
   }
+  REQUIRE(ss1.str() ==
+          "Semicolon(;) Variable(b) Semicolon(;) Equal(=) Plus(+) Number(1) "
+          "Variable(a) Variable(b) Semicolon(;) Equal(=) Plus(+) Minus(-) "
+          "Number(1) Number(1123) Number(456) Variable(a) ");
 
-  // print the array
-  std::cout << "Original:\t";
-  for (int i = 0; i < nums.length; i++) {
-    std::cout << nums[i] << " ";
-  }
-  std::cout << std::endl;
+  ds::ExprTreeNode *root = ds::Evaluator::buildExprTree(postfixStk);
+  stringstream ss2;
+  ss2 << *root;
+  REQUIRE(ss2.str() == "└─Semicolon(;)\n"
+                       "  ├─Semicolon(;)\n"
+                       "  │ ├─Semicolon(;)\n"
+                       "  │ │ └─Equal(=)\n"
+                       "  │ │   ├─Variable(a)\n"
+                       "  │ │   └─Plus(+)\n"
+                       "  │ │     ├─Number(456)\n"
+                       "  │ │     └─Minus(-)\n"
+                       "  │ │       ├─Number(1123)\n"
+                       "  │ │       └─Number(1)\n"
+                       "  │ └─Equal(=)\n"
+                       "  │   ├─Variable(b)\n"
+                       "  │   └─Plus(+)\n"
+                       "  │     ├─Variable(a)\n"
+                       "  │     └─Number(1)\n"
+                       "  └─Variable(b)\n");
 
-  // test the reverse function
-  nums.reverse();
-  std::cout << "Reverse:\t";
-  for (int i = 0; i < nums.length; i++) {
-    std::cout << nums[i] << " ";
-  }
-  std::cout << std::endl;
+  ds::BigInt res = ds::Evaluator::evaluateExprTree(root);
+  stringstream ss3;
+  ss3 << res;
+  REQUIRE(ss3.str() == "1579");
 
-  // now the destructor is invoked
-
-  return 0;
+  delete root;
 }
