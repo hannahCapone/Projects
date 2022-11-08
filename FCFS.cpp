@@ -1,5 +1,5 @@
 // Hannah Capone
-// First in First out Simulation
+// First Come First Served
 
 #include <iostream>
 #include <queue> // for use of queue as data structure
