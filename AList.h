@@ -93,7 +93,6 @@ AList<ItemType>::AList(const AList<ItemType> &other) {
 
 /** Insert x at the front of list. */
 template <typename ItemType> void AList<ItemType>::addFirst(ItemType x) {
-  // TODO:
   count++;
   for (int i = count-1; i > 0; i--) {
     items[i] = items[i-1];
@@ -103,7 +102,6 @@ template <typename ItemType> void AList<ItemType>::addFirst(ItemType x) {
 
 /** Return the first element in list. */
 template <typename ItemType> ItemType &AList<ItemType>::getFirst() const {
-  // TODO:
   return items[0];
 }
 
@@ -114,7 +112,6 @@ template <typename ItemType> ItemType &AList<ItemType>::getFirst() const {
  * @return ItemType the first item in the original list before removing
  */
 template <typename ItemType> ItemType AList<ItemType>::removeFirst() {
-  // TODO:
    ItemType value = items[0];
    for (int i = 1; i < count; i++) {
      items[i-1] = items[i];
