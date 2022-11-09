@@ -10,7 +10,7 @@ namespace ds {
  * @return ExprTreeNode* the root of the generated expression tree
  */
 ExprTreeNode *Evaluator::buildExprTree(std::stack<Token> &tokenStk) {
-  // TODO:
+
   if (tokenStk.empty())
   {
     return nullptr;
@@ -57,7 +57,7 @@ ExprTreeNode *Evaluator::buildExprTree(std::stack<Token> &tokenStk) {
  */
 BigInt Evaluator::evaluateExprTree(const ExprTreeNode *root,
                                    std::map<std::string, BigInt> &varTbl) {
-  // TODO:
+
   if (root == nullptr) 
   {
     return BigInt();
