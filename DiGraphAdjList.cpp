@@ -12,7 +12,6 @@ namespace ds {
  * @return true if the edge is in the graph
  */
 bool DiGraphAdjList::hasEdge(int s, int t) const {
-  // TODO:
   for (int &i : this->adj(s)) {
     if (i == t) {
       return true;
@@ -28,7 +27,6 @@ bool DiGraphAdjList::hasEdge(int s, int t) const {
  * @param t id of the target vertex
  */
 void DiGraphAdjList::addEdge(int s, int t) {
-  // TODO:
   if (hasEdge(s, t) == false) {
     adjList[s].addLast(t);
   }
@@ -41,7 +39,6 @@ void DiGraphAdjList::addEdge(int s, int t) {
  * @param t id of the target vertex
  */
 void DiGraphAdjList::delEdge(int s, int t) {
-  // TODO:
   int i;
   if (hasEdge(s, t) == true) {
     for (int j = 0; j < adj(s).size(); j++) {
@@ -59,7 +56,6 @@ void DiGraphAdjList::delEdge(int s, int t) {
  * @return boolean
  */
 bool hasCycleHelp(const DiGraphAdjList &g, int v, int *marked) {
-  // TODO:
 
   // marked[v] = 0; // new
   // marked[v] = 1; // active
