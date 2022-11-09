@@ -146,7 +146,7 @@ public:
  */
 template <typename Key, typename Value>
 Value BSTMap<Key, Value>::get(const Key &sk) const {
-  // TODO: You may assume that `sk` is in the BSTMap.
+  //  assume that `sk` is in the BSTMap.
   // make variable set at root to move through BSTMap
   BSTMapNode<Key, Value> *holder = root;
   // move holder until matches with sk
@@ -164,7 +164,7 @@ Value BSTMap<Key, Value>::get(const Key &sk) const {
  */
 template <typename Key, typename Value>
 void BSTMap<Key, Value>::remove(const Key &rk) {
-  // TODO: You may assume that `rk` is in the BSTMap.
+  // assume that `rk` is in the BSTMap.
 
   // set root to removeHelp
   root = removeHelp(root, rk);
