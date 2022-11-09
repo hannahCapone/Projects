@@ -8,7 +8,7 @@ namespace ds {
  * @param len length of the IntArray
  */
 IntArray::IntArray(int len) {
-  // TODO: initialize data members
+  // initialize data members
   length = len;
   storedArray = new int[len];
 }
@@ -17,7 +17,7 @@ IntArray::IntArray(int len) {
  * Destroy the IntArray object
  */
 IntArray::~IntArray() {
-  // TODO: delete the internal array
+  // delete the internal array
   delete [] storedArray;
 }
 
@@ -25,7 +25,7 @@ IntArray::~IntArray() {
  * Reverse the IntArray
  */
 void IntArray::reverse() {
-  // TODO: reverse `storedArray`
+  // reverse `storedArray`
   int *temp = new int[length];
   for (int i = 0; i < length; i++)
   {
