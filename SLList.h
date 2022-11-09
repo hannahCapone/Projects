@@ -80,7 +80,7 @@ public:
  */
 template <typename ItemType>
 SLList<ItemType>::SLList(const SLList<ItemType> &other) {
-  // TODO: create a list that is identical to `other'
+  // create a list that is identical to `other'
   
   sentinel = new Node<ItemType>(other.sentinel->next->item, nullptr);
 
@@ -104,7 +104,6 @@ SLList<ItemType>::SLList(const SLList<ItemType> &other) {
  * @return ItemType& the i-th item
  */
 template <typename ItemType> ItemType &SLList<ItemType>::get(int i) const {
-  // TODO:
   Node<ItemType> *p = sentinel->next;
   for (int j = 0; j < i; j++) {
     p = p->next;  
@@ -119,7 +118,6 @@ template <typename ItemType> ItemType &SLList<ItemType>::get(int i) const {
  * @return ItemType the first item in the original list before removing
  */
 template <typename ItemType> ItemType SLList<ItemType>::removeFirst() {
-  // TODO:
   Node<ItemType> *p = sentinel->next;
   ItemType temp = p->item;
   
@@ -136,7 +134,6 @@ template <typename ItemType> ItemType SLList<ItemType>::removeFirst() {
  * @return ItemType the last item in the original list before removing
  */
 template <typename ItemType> ItemType SLList<ItemType>::removeLast() {
-  // TODO:
 
   Node<ItemType> *p1 = sentinel;
   Node<ItemType> *p2 = sentinel;
@@ -152,7 +149,6 @@ template <typename ItemType> ItemType SLList<ItemType>::removeLast() {
   temp = p1->item;
   delete p1;
   p2->next = nullptr;
-  // just added ^
   return temp;
 }
 
