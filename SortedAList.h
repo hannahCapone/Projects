@@ -70,7 +70,6 @@ public:
  * Remove and return the i-th item from the sorted list.
  */
 template <typename ItemType> ItemType SortedAList<ItemType>::remove(int i) {
-  // TODO:
   // store the value of what is being removed
   ItemType value = items[i];
   
@@ -89,7 +88,6 @@ template <typename ItemType> ItemType SortedAList<ItemType>::remove(int i) {
  */
 template <typename ItemType>
 void SortedAList<ItemType>::put(const ItemType &it) {
-  // TODO:
 
   // resize if neccesary
   if (count == maxCnt) {
