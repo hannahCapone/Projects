@@ -5,12 +5,6 @@
 #include "CheckingAccount.h"
 using namespace std;
 
-
-
-
-
-// To Do: Please write comments and code to implement CheckingAccount here
-
 /* 
 Constructor for CheckingAccount takes dollars, cents and fee
 */
@@ -21,7 +15,6 @@ CheckingAccount::CheckingAccount(int dollars, int cents, double fee) : BankAccou
         cout << "Illegal value for check fee.\n";
         exit(1);
     }
-    
 }
 
 /*
