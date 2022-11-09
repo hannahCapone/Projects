@@ -124,7 +124,6 @@ BigInt BigInt::operator+(const BigInt &other) const {
 BigInt BigInt::operator-(const BigInt &other) const {
   // Reference: https://en.wikipedia.org/wiki/Absolute_difference
   // Example: 456 - 1123 = 667
-  // TODO:
   int dif, d1, d2, borrow = 0;
   BigInt res;
   
