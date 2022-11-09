@@ -39,9 +39,6 @@ bool precOrSame(Token a ,Token b)
  */
 stack<Token>
 InfixToPostfixTransformer::infixToPostfix(const VList<Token> &infix) {
-  // Example:
-  // https://docs.google.com/presentation/d/1NO2ZKEVu3IZ07Oy-QNxdAell_FThC6RylEWDEGRim6U/edit#slide=id.gecc4e479c6_0_11
-  // TODO:
   // create postfix stack
   stack<Token> postfixStk;
   
