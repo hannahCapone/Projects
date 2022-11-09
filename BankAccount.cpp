@@ -4,7 +4,6 @@
 #include "BankAccount.h"
 using namespace std;
 
-// Please write comments here
 
 /* 
 Constructor for BankAccount takes dollars and cents 
